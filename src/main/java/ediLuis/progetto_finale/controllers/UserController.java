@@ -19,17 +19,11 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ORGANIZER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<User> findAll(@RequestParam(defaultValue = "0") int page,
                               @RequestParam(defaultValue = "5") int size){
         return this.userService.findAll(page, size);
     }
-
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public NewUserRespDTO saveUser(@RequestBody NewUserDTO body){
-//        return this.userService.saveNewUser(body);
-//    }
 
 
 

@@ -34,7 +34,7 @@ public class BookingService {
         Event event = this.eventService.findById(UUID.fromString(body.eventId()));
 
         // controllo se ha già una prenotazione
-      //  if (this.bookingRepository.existsByEventDateAndUserId(String.valueOf(user.getId()), event.getDate())) throw new BadRequestException("La prenotazione è già presente ");
+        // if (this.bookingRepository.existsByEventDateAndUserId(String.valueOf(user.getId()), event.getDate())) throw new BadRequestException("La prenotazione è già presente ");
 
         Booking newBooking = new Booking(user, event);
         this.bookingRepository.save(newBooking);
