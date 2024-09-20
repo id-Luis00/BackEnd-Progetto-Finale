@@ -30,10 +30,6 @@ public class UserService {
         return this.userRepository.findById(id).orElseThrow(() -> new NotFoundException("Utente con id " + id + " non è stato trovato"));
     }
 
-//    public User findByEmail(String email){
-//        return this.userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("Nessun utente trovato con email " + email));
-//    }
-
     public NewUserRespDTO saveNewUser(NewUserDTO body) {
 
         // controllo se l'utente esiste già
@@ -43,6 +39,10 @@ public class UserService {
         User user = new User(body.username(), body.email(), body.password(), body.name(), body.surname());
         this.userRepository.save(user);
         return new NewUserRespDTO(user.getId());
+    }
+
+    public User findByEmail(String email){
+       return this.userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("Non è stato trovato nessun utente con email " + email));
     }
 
 

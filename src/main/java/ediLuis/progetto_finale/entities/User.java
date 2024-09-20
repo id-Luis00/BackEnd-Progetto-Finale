@@ -1,6 +1,8 @@
 package ediLuis.progetto_finale.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ediLuis.progetto_finale.enums.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -17,6 +19,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "utente")
+@JsonIgnoreProperties({"password", "authorities", "role", "enabled", "accountNonLocked", "credentialsNonExpired", "accountNonExpired"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +34,9 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User() {
+    }
 
     public User(String username, String email, String password, String name, String surname) {
         this.username = username;
@@ -48,12 +54,12 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return this.username;
     }
 
 
