@@ -21,7 +21,7 @@ public class Booking {
     @Setter(AccessLevel.NONE)
     private UUID id;
 
-    private LocalDate date_booking;
+    private LocalDate datebooking;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -32,7 +32,7 @@ public class Booking {
     private Event event;
 
     public Booking( User user, Event event) {
-        this.date_booking = LocalDate.now();
+        this.datebooking = LocalDate.now();
         this.user = user;
         this.event = event;
     }

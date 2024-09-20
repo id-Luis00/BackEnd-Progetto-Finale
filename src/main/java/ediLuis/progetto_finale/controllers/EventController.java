@@ -2,8 +2,11 @@ package ediLuis.progetto_finale.controllers;
 
 
 import ediLuis.progetto_finale.entities.Event;
+import ediLuis.progetto_finale.payloads.bookingPayloads.BookingDTO;
+import ediLuis.progetto_finale.payloads.bookingPayloads.BookingRespDTO;
 import ediLuis.progetto_finale.payloads.eventPayloads.EventDTO;
 import ediLuis.progetto_finale.payloads.eventPayloads.EventRespDTO;
+import ediLuis.progetto_finale.services.BookingService;
 import ediLuis.progetto_finale.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,8 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private BookingService bookingService;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ORGANIZER')")
@@ -46,6 +51,15 @@ public class EventController {
     @PreAuthorize("hasAuthority('ORGANIZER')")
     public void findAndDelete(@PathVariable UUID eventId){
         this.eventService.findAndDelete(eventId);
+    }
+
+
+
+    @PostMapping("/booking")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('USER')")
+    public BookingRespDTO saveBooking(@RequestBody BookingDTO body){
+        return this.bookingService.saveNewBooking(body);
     }
 
 
