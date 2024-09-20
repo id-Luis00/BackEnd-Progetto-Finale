@@ -10,12 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private PasswordEncoder bcrypt;
 
     @Autowired
     private UserRepository userRepository;
@@ -36,7 +40,7 @@ public class UserService {
         if (this.userRepository.existsByEmail(body.email())) throw new BadRequestException("L'email è già in uso");
         if (this.userRepository.existsByUsername(body.username())) throw new BadRequestException("Questo username è già in uso");
 
-        User user = new User(body.username(), body.email(), body.password(), body.name(), body.surname());
+        User user = new User(body.username(), body.email(), bcrypt.encode(body.password()), body.name(), body.surname());
         this.userRepository.save(user);
         return new NewUserRespDTO(user.getId());
     }

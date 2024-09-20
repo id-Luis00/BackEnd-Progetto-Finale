@@ -1,6 +1,7 @@
 package ediLuis.progetto_finale.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,17 +19,22 @@ public class Event {
     @Setter(AccessLevel.NONE)
     private UUID id;
 
-    private LocalDate date_event;
+    private LocalDate date;
     private String title;
     private String description;
     private String place;
     private int num_sits;
 
-    public Event(LocalDate date_event, String title, String description, String place, int num_sits) {
-        this.date_event = date_event;
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private User user;
+
+    public Event(LocalDate date, String title, String description, String place, int num_sits, User user) {
+        this.date = date;
         this.title = title;
         this.description = description;
         this.place = place;
         this.num_sits = num_sits;
+        this.user=user;
     }
 }

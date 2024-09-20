@@ -1,10 +1,6 @@
-package ediLuis.BE_W6_D1.exceptions;
+package ediLuis.progetto_finale.exceptions;
 
 
-import ediLuis.progetto_finale.exceptions.BadRequestException;
-import ediLuis.progetto_finale.exceptions.NotFoundException;
-import ediLuis.progetto_finale.exceptions.UnauthorizedException;
-import ediLuis.progetto_finale.payloads.exceptionsPayload.ErrorPayload;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

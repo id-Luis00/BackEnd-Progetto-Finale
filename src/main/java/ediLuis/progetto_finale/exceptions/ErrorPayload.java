@@ -1,4 +1,4 @@
-package ediLuis.progetto_finale.payloads.exceptionsPayload;
+package ediLuis.progetto_finale.exceptions;
 
 import java.time.LocalDateTime;
 
